@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalaghar — Where Art Finds Its Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #e91e8c;
+    --navy: #1a1f5e;
+    --cream: #fdf6ec;
+    --soft-pink: #f9c4df;
+    --warm: #f5a623;
+    --green: #4caf50;
+    --text: #2d2d2d;
+    --muted: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 60px;
+    background: rgba(253,246,236,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(233,30,140,0.1);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .logo span { color: var(--pink); }
+
+  nav ul {
+    list-style: none;
+    display: flex; gap: 36px;
+  }
+  nav ul a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--pink); }
+
+  .nav-cta {
+    background: var(--pink);
+    color: white !important;
+    padding: 9px 22px;
+    border-radius: 50px;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--navy) !important; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .blob1 { width: 400px; height: 400px; background: var(--pink); top: -100px; right: -80px; }
+  .blob2 { width: 300px; height: 300px; background: var(--navy); bottom: 50px; left: -60px; }
+  .blob3 { width: 200px; height: 200px; background: var(--warm); top: 40%; right: 20%; }
+
+  .hero-content { max-width: 620px; position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(233,30,140,0.1);
+    color: var(--pink);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(233,30,140,0.2);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+  .hero h1 em { color: var(--pink); font-style: italic; }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 500px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--pink);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233,30,140,0.3); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: 2px solid var(--navy);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-outline:hover { background: var(--navy); color: white; transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 48px;
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--navy);
+    font-weight: 600;
+    display: block;
+  }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+  /* HERO IMAGE COLLAGE */
+  .hero-visual {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    width: 420px; height: 480px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .hero-img-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--soft-pink), white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    position: relative;
+  }
+  .hero-img-card:nth-child(1) { grid-row: span 2; background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+  .hero-img-card:nth-child(2) { background: linear-gradient(135deg, #e8eaf6, #c5cae9); }
+  .hero-img-card:nth-child(3) { background: linear-gradient(135deg, #fff3e0, #ffe0b2); }
+  .hero-img-card:nth-child(4) { grid-column: span 2; background: linear-gradient(135deg, #e8f5e9, #c8e6c9); }
+
+  .img-label {
+    position: absolute; bottom: 12px; left: 12px;
+    font-size: 0.75rem; font-weight: 500;
+    color: rgba(0,0,0,0.6);
+    background: rgba(255,255,255,0.8);
+    padding: 4px 10px; border-radius: 50px;
+  }
+
+  /* SECTION HELPERS */
+  section { padding: 100px 60px; }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    background: var(--navy);
+    color: white;
+    border-radius: 32px;
+    margin: 0 40px;
+    padding: 80px 60px;
+  }
+  .how .section-label { color: var(--soft-pink); }
+  .how .section-title { color: white; }
+
+  .steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; margin-top: 60px;
+  }
+
+  .step { position: relative; }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: rgba(255,255,255,0.08);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .step-icon {
+    width: 52px; height: 52px;
+    background: rgba(233,30,140,0.2);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    border: 1px solid rgba(233,30,140,0.3);
+  }
+  .step h3 { font-size: 1.1rem; font-weight: 500; margin-bottom: 10px; color: white; }
+  .step p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  .step-connector {
+    position: absolute; right: -20px; top: 80px;
+    font-size: 1.2rem; color: rgba(255,255,255,0.2);
+  }
+
+  /* PRODUCTS */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 28px;
+    margin-top: 60px;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+
+  .product-img {
+    height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-badge {
+    position: absolute; top: 14px; right: 14px;
+    background: white;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 50px;
+    color: var(--green);
+  }
+
+  .product-info { padding: 20px; }
+  .artisan-tag {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px;
+  }
+  .artisan-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    color: white;
+    font-weight: 600;
+  }
+  .artisan-name { font-size: 0.8rem; color: var(--muted); }
+  .verified-badge { font-size: 0.7rem; color: var(--green); }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .product-origin { font-size: 0.8rem; color: var(--muted); margin-bottom: 14px; }
+
+  .product-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .product-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .add-btn {
+    background: var(--pink);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .add-btn:hover { background: var(--navy); transform: scale(1.05); }
+
+  /* ARTISAN SPOTLIGHT */
+  .spotlight {
+    background: linear-gradient(135deg, #fff0f6, #fdf6ec);
+    border-radius: 28px;
+    padding: 60px;
+    display: grid; grid-template-columns: 280px 1fr;
+    gap: 60px; align-items: center;
+    margin-top: 80px;
+  }
+
+  .artisan-portrait {
+    width: 280px; height: 340px;
+    background: linear-gradient(160deg, var(--soft-pink), #f3e5f5);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative;
+  }
+  .artisan-portrait::after {
+    content: '✓ Verified Artisan';
+    position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--green);
+    color: white;
+    font-size: 0.75rem;
+    padding: 6px 14px;
+    border-radius: 50px;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .artisan-info .section-label { margin-bottom: 8px; }
+  .artisan-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--navy); margin-bottom: 8px;
+  }
+  .artisan-location { font-size: 0.88rem; color: var(--muted); margin-bottom: 20px; }
+  .artisan-bio { font-size: 0.95rem; line-height: 1.8; color: #555; margin-bottom: 28px; }
+
+  .artisan-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .tag {
+    background: rgba(233,30,140,0.08);
+    color: var(--pink);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(233,30,140,0.15);
+  }
+
+  .artisan-stats { display: flex; gap: 32px; }
+  .a-stat span { font-size: 1.4rem; font-weight: 600; color: var(--navy); display: block; font-family: 'Playfair Display', serif; }
+  .a-stat small { font-size: 0.78rem; color: var(--muted); }
+
+  /* VALUES */
+  .values-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 60px;
+  }
+  .value-card {
+    padding: 36px 28px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .value-card:hover { border-color: var(--pink); box-shadow: 0 8px 24px rgba(233,30,140,0.08); }
+  .value-icon { font-size: 1.8rem; margin-bottom: 16px; }
+  .value-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+  .value-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
+
+  /* SURVEY RESULTS */
+  .survey {
+    background: white;
+    border-radius: 28px;
+    padding: 60px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .survey-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px; margin-top: 48px;
+  }
+
+  .survey-item { text-align: center; }
+  .donut {
+    width: 120px; height: 120px;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+  .donut svg { transform: rotate(-90deg); }
+  .donut-text {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .survey-item p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* JOIN CTA */
+  .join-cta {
+    text-align: center;
+    background: linear-gradient(135deg, var(--navy), #2d3580);
+    color: white;
+    border-radius: 32px;
+    padding: 80px 60px;
+    margin: 0 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .join-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(233,30,140,0.3), transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(245,166,35,0.2), transparent 60%);
+  }
+  .join-cta > * { position: relative; z-index: 1; }
+
+  .join-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 16px;
+  }
+  .join-cta p { color: rgba(255,255,255,0.65); font-size: 1.05rem; margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  .join-options {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  }
+  .join-btn {
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    border: none;
+  }
+  .join-artisan { background: var(--pink); color: white; }
+  .join-artisan:hover { background: #c2177d; transform: translateY(-2px); }
+  .join-buyer { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.25) !important; }
+  .join-buyer:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 60px 40px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  .footer-brand p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-top: 12px; max-width: 240px; }
+  .footer-col h4 { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a { text-decoration: none; font-size: 0.85rem; color: var(--muted); transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--pink); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.06);
+    font-size: 0.82rem; color: var(--muted);
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    width: 90%; max-width: 480px;
+    position: relative;
+  }
+  .modal h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--navy); margin-bottom: 8px;
+  }
+  .modal p { color: var(--muted); font-size: 0.9rem; margin-bottom: 28px; }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted);
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    background: white;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--pink);
+  }
+  .form-submit {
+    width: 100%;
+    background: var(--pink); color: white;
+    padding: 14px;
+    border-radius: 50px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  .form-submit:hover { background: var(--navy); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 30px; right: 30px;
+    background: var(--navy); color: white;
+    padding: 14px 24px; border-radius: 12px;
+    font-size: 0.9rem;
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.3s;
+    z-index: 300;
+    border-left: 4px solid var(--pink);
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* CART ICON */
+  .cart-icon {
+    position: relative; cursor: pointer;
+  }
+  .cart-count {
+    position: absolute; top: -8px; right: -8px;
+    background: var(--pink); color: white;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    font-size: 0.68rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+  }
+
+  /* FILTER PILLS */
+  .filter-pills {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+  .pill {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    background: white;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+  .pill.active, .pill:hover { background: var(--pink); color: white; border-color: var(--pink); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content { animation: fadeUp 0.8s ease forwards; }
+  .hero-visual { animation: fadeUp 0.8s 0.2s ease both; }
+
+  /* SEARCH BAR */
+  .search-bar {
+    display: flex; gap: 0;
+    max-width: 460px;
+    background: white;
+    border-radius: 50px;
+    border: 2px solid rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-top: 24px;
+    transition: border-color 0.2s;
+  }
+  .search-bar:focus-within { border-color: var(--pink); }
+  .search-bar input {
+    flex: 1; padding: 13px 20px;
+    border: none; outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    background: transparent;
+    color: var(--text);
+  }
+  .search-bar button {
+    background: var(--pink); color: white;
+    border: none; padding: 13px 24px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .search-bar button:hover { background: var(--navy); }
+
+  /* PRODUCTS HEADER */
+  .products-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    section { padding: 60px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-visual { display: none; }
+    .steps { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .survey-stats { grid-template-columns: 1fr; }
+    .spotlight { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .join-cta, .how { margin: 0 16px; padding: 48px 28px; }
+    .join-cta { margin: 0 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">कला<span>घर</span> <small style="font-size:0.7rem;color:var(--muted);font-family:'DM Sans',sans-serif;font-weight:300;">Kalaghar</small></div>
+  <ul>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#artisans">Artisans</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#" onclick="openModal('join-modal')">Join</a></li>
+    <li>
+      <a href="#" class="cart-icon" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cart-count">0</span>
+      </a>
+    </li>
+    <li><a href="#" class="nav-cta" onclick="openModal('join-modal')">Sell on Kalaghar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-blob blob3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🎨 Empowering Local Artisans</div>
+    <h1>Every piece has a <em>story</em> worth knowing.</h1>
+    <p>Kalaghar connects traditional artists and craftspeople with buyers who value authentic, handmade work — with fair pricing, verified profiles, and zero middlemen.</p>
+
+    <div class="search-bar">
+      <input type="text" id="hero-search" placeholder="Search pottery, embroidery, jewelry..." onkeydown="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()">Search</button>
+    </div>
+
+    <div class="hero-actions" style="margin-top:28px;">
+      <a href="#shop" class="btn-primary">Browse Marketplace</a>
+      <a href="#" onclick="openModal('join-modal')" class="btn-outline">Join as Artisan</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">97%</span>
+        <div class="stat-label">believe artisans deserve more reach</div>
+      </div>
+      <div>
+        <span class="stat-num">94%</span>
+        <div class="stat-label">want a platform to discover artisans</div>
+      </div>
+      <div>
+        <span class="stat-num">0%</span>
+        <div class="stat-label">commission on first 10 sales</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-card">🏺<div class="img-label">Pottery</div></div>
+    <div class="hero-img-card">🪡<div class="img-label">Embroidery</div></div>
+    <div class="hero-img-card">💍<div class="img-label">Jewelry</div></div>
+    <div class="hero-img-card">🧣<div class="img-label">Textiles</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="padding: 40px 60px 100px;">
+  <div class="how">
+    <div class="section-label">Simple Process</div>
+    <div class="section-title">How Kalaghar works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">🖊️</div>
+        <h3>Artisan Sign-up & Onboarding</h3>
+        <p>Register with guided step-by-step help in your regional language. Our team helps you set up your profile and list your first product.</p>
+        <span class="step-connector">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">🛍️</div>
+        <h3>Verified Profile & Product Listing</h3>
+        <p>Get a verified badge, set fair prices with AI guidance, and share the story behind each creation — your craft's soul, online.</p>
+        <span class="step-connector">→</span>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">💸</div>
+        <h3>Secure Sales & Community</h3>
+        <p>Buyers connect directly with you. Payments are safe, pricing is transparent, and you keep what your work is truly worth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+  <div class="section-label">Marketplace</div>
+  <div class="products-header">
+    <div>
+      <div class="section-title">Handcrafted with love</div>
+      <p style="color:var(--muted);font-size:0.9rem;">Every item directly from verified artisans across India</p>
+    </div>
+    <div class="filter-pills" id="filter-pills">
+      <button class="pill active" onclick="filterProducts('all', this)">All</button>
+      <button class="pill" onclick="filterProducts('textile', this)">Textiles</button>
+      <button class="pill" onclick="filterProducts('jewelry', this)">Jewelry</button>
+      <button class="pill" onclick="filterProducts('pottery', this)">Pottery</button>
+      <button class="pill" onclick="filterProducts('art', this)">Art</button>
+    </div>
+  </div>
+
+  <div class="products-grid" id="products-grid"></div>
+</section>
+
+<!-- ARTISAN SPOTLIGHT -->
+<section id="artisans" style="padding-top: 20px;">
+  <div class="section-label">Artisan Spotlight</div>
+  <div class="section-title">Meet the maker</div>
+
+  <div class="spotlight">
+    <div class="artisan-portrait">👩‍🎨</div>
+    <div class="artisan-info">
+      <div class="section-label">Featured Artisan</div>
+      <h2>Sunita Didi</h2>
+      <div class="artisan-location">📍 Bolpur, West Bengal</div>
+      <p class="artisan-bio">
+        A renowned Kantha embroidery artist from a village near Shantiniketan, Sunita transforms old saris and fabrics into breathtaking artworks depicting scenes from rural life and mythology. Each stitch carries decades of tradition and a grandmother's patience.
+      </p>
+      <div class="artisan-tags">
+        <span class="tag">Kantha Embroidery</span>
+        <span class="tag">East India</span>
+        <span class="tag">Verified</span>
+        <span class="tag">12 years crafting</span>
+      </div>
+      <div class="artisan-stats">
+        <div class="a-stat">
+          <span>47</span>
+          <small>Products sold</small>
+        </div>
+        <div class="a-stat">
+          <span>4.9★</span>
+          <small>Avg rating</small>
+        </div>
+        <div class="a-stat">
+          <span>23</span>
+          <small>Happy buyers</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="about" style="background: white; border-radius: 32px; margin: 0 40px;">
+  <div class="section-label">Why Kalaghar</div>
+  <div class="section-title">Our core values</div>
+  <p style="color:var(--muted);max-width:500px;line-height:1.7;">These principles guide everything, from selecting artisans to delivering products to customers.</p>
+
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <h3>Authenticity</h3>
+      <p>Every product is genuinely handcrafted using traditional techniques passed down through generations. No mass production, no imposters.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🔍</div>
+      <h3>Transparency</h3>
+      <p>Complete visibility into our supply chain, artisan partnerships, and pricing structure. You always know exactly where your money goes.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌿</div>
+      <h3>Sustainability</h3>
+      <p>Supporting eco-friendly practices and sustainable materials that respect both people and planet, from craft to delivery.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">⚖️</div>
+      <h3>Fair Trade</h3>
+      <p>Artisans receive fair compensation and work in safe, respectful conditions. We ensure pricing reflects the true value of skilled craftsmanship.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🏛️</div>
+      <h3>Cultural Preservation</h3>
+      <p>Helping preserve traditional crafts and cultural knowledge for future generations by creating sustainable markets for traditional art.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">💡</div>
+      <h3>Innovation</h3>
+      <p>Bridging traditional craftsmanship with modern technology and market access, including AI tools for better product discovery.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SURVEY RESULTS -->
+<section style="padding: 100px 60px;">
+  <div class="section-label">Validated by Users</div>
+  <div class="section-title">What people told us</div>
+  <p style="color:var(--muted);margin-bottom:48px;line-height:1.7;max-width:520px;">We surveyed 69 people about the need for a platform like Kalaghar. The response was clear.</p>
+
+  <div class="survey">
+    <div class="survey-stats">
+      <div class="survey-item">
+        <div class="donut">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#f0f0f0" stroke-width="12"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--pink)" stroke-width="12"
+              stroke-dasharray="314" stroke-dashoffset="9" stroke-linecap="round"/>
+          </svg>
+          <div class="donut-text">97%</div>
+        </div>
+        <p>believe artists behind handmade arts should get more recognition and reach</p>
+      </div>
+      <div class="survey-item">
+        <div class="donut">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#f0f0f0" stroke-width="12"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--navy)" stroke-width="12"
+              stroke-dasharray="314" stroke-dashoffset="19" stroke-linecap="round"/>
+          </svg>
+          <div class="donut-text">94%</div>
+        </div>
+        <p>would like a platform to discover, support, or connect with artisans</p>
+      </div>
+      <div class="survey-item">
+        <div class="donut">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="#f0f0f0" stroke-width="12"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="12"
+              stroke-dasharray="314" stroke-dashoffset="25" stroke-linecap="round"/>
+          </svg>
+          <div class="donut-text">97%</div>
+        </div>
+        <p>believe such a platform can help revive local culture and traditions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN CTA -->
+<div class="join-cta">
+  <h2>Ready to join the Kalaghar family?</h2>
+  <p>Whether you're an artisan looking to reach new buyers, or a buyer looking for something truly meaningful — there's a place for you here.</p>
+  <div class="join-options">
+    <button class="join-btn join-artisan" onclick="openModal('join-modal')">🎨 Join as Artisan</button>
+    <button class="join-btn join-buyer" onclick="openModal('buyer-modal')">🛍️ Shop as Buyer</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">कला<span>घर</span></div>
+      <p>A digital home for India's traditional artists and craftspeople. Connecting culture, craft, and community.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Marketplace</h4>
+      <ul>
+        <li><a href="#">Browse All</a></li>
+        <li><a href="#">Textiles</a></li>
+        <li><a href="#">Jewelry</a></li>
+        <li><a href="#">Pottery</a></li>
+        <li><a href="#">Paintings</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Artisans</h4>
+      <ul>
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Workshops</a></li>
+        <li><a href="#">Digital Skills</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Fair Trade</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Kalaghar. Made with ❤️ for India's artisans.</span>
+    <span style="color:var(--pink);">क्या क्या कहानियाँ हैं इस रंग के पीछे।</span>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="join-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('join-modal')">✕</button>
+    <h2>Join as Artisan</h2>
+    <p>Start your journey. We'll help you set up everything, step by step.</p>
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" placeholder="e.g. Sunita Devi">
+    </div>
+    <div class="form-group">
+      <label>Craft / Skill</label>
+      <select>
+        <option>Embroidery</option>
+        <option>Pottery & Ceramics</option>
+        <option>Jewelry Making</option>
+        <option>Handloom Weaving</option>
+        <option>Painting & Art</option>
+        <option>Woodwork</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Your City / State</label>
+      <input type="text" placeholder="e.g. Bolpur, West Bengal">
+    </div>
+    <div class="form-group">
+      <label>Phone Number (WhatsApp preferred)</label>
+      <input type="tel" placeholder="+91 XXXXX XXXXX">
+    </div>
+    <button class="form-submit" onclick="submitForm('join-modal', 'Welcome to Kalaghar! We\'ll contact you soon 🎨')">Register as Artisan</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="buyer-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('buyer-modal')">✕</button>
+    <h2>Create Buyer Account</h2>
+    <p>Discover and support authentic Indian craft.</p>
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" placeholder="Your name">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
+      <label>Interests</label>
+      <select>
+        <option>Textiles & Fabrics</option>
+        <option>Jewelry & Accessories</option>
+        <option>Home Decor</option>
+        <option>Art & Paintings</option>
+        <option>All of the above</option>
+      </select>
+    </div>
+    <button class="form-submit" onclick="submitForm('buyer-modal', 'Account created! Happy shopping 🛍️')">Create Account</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const products = [
+    { id:1, name:'Kantha Embroidery Stole', artisan:'Sunita Didi', location:'West Bengal', price:1200, category:'textile', emoji:'🧣', bg:'#fce4ec', artisanBg:'#e91e8c', initials:'SD', badge:'In Stock' },
+    { id:2, name:'Rajasthani Mojadi', artisan:'Ramesh Chamar', location:'Rajasthan', price:500, category:'art', emoji:'👟', bg:'#fff3e0', artisanBg:'#f5a623', initials:'RC', badge:'In Stock' },
+    { id:3, name:'Blue Pottery Vase', artisan:'Fatima Bi', location:'Jaipur, Rajasthan', price:850, category:'pottery', emoji:'🏺', bg:'#e3f2fd', artisanBg:'#1a1f5e', initials:'FB', badge:'Limited' },
+    { id:4, name:'Embroidery Quilt', artisan:'Meena Devi', location:'Gujarat', price:2500, category:'textile', emoji:'🛏️', bg:'#f3e5f5', artisanBg:'#9c27b0', initials:'MD', badge:'In Stock' },
+    { id:5, name:'Beaded Necklace Set', artisan:'Nalini Sharma', location:'Mumbai, Maharashtra', price:680, category:'jewelry', emoji:'📿', bg:'#e8f5e9', artisanBg:'#4caf50', initials:'NS', badge:'In Stock' },
+    { id:6, name:'Madhubani Painting', artisan:'Geeta Kumari', location:'Bihar', price:3200, category:'art', emoji:'🖼️', bg:'#fff9c4', artisanBg:'#f44336', initials:'GK', badge:'1 left' },
+    { id:7, name:'Terracotta Jewelry Set', artisan:'Priya Das', location:'Odisha', price:420, category:'jewelry', emoji:'💎', bg:'#fbe9e7', artisanBg:'#ff5722', initials:'PD', badge:'In Stock' },
+    { id:8, name:'Hand-woven Saree', artisan:'Lakshmi Bai', location:'Varanasi, UP', price:4500, category:'textile', emoji:'👗', bg:'#e8eaf6', artisanBg:'#3f51b5', initials:'LB', badge:'Made to order' },
+  ];
+
+  let cart = 0;
+  let currentFilter = 'all';
+
+  function renderProducts(filter = 'all') {
+    const grid = document.getElementById('products-grid');
+    const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+    grid.innerHTML = filtered.map(p => `
+      <div class="product-card" data-cat="${p.category}">
+        <div class="product-img" style="background:${p.bg}">
+          <span>${p.emoji}</span>
+          <span class="product-badge">${p.badge}</span>
+        </div>
+        <div class="product-info">
+          <div class="artisan-tag">
+            <div class="artisan-avatar" style="background:${p.artisanBg}">${p.initials}</div>
+            <span class="artisan-name">${p.artisan}</span>
+            <span class="verified-badge">✓</span>
+          </div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-origin">📍 ${p.location}</div>
+          <div class="product-footer">
+            <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+            <button class="add-btn" onclick="addToCart('${p.name}')">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filterProducts(cat, el) {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    renderProducts(cat);
+  }
+
+  function addToCart(name) {
+    cart++;
+    document.getElementById('cart-count').textContent = cart;
+    showToast(`"${name}" added to cart! 🎉`);
+  }
+
+  function openCart() {
+    if (cart === 0) {
+      showToast('Your cart is empty. Explore the marketplace!');
+    } else {
+      showToast(`You have ${cart} item${cart > 1 ? 's' : ''} in your cart.`);
+    }
+  }
+
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  function submitForm(modalId, msg) {
+    closeModal(modalId);
+    showToast(msg);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3200);
+  }
+
+  function doSearch() {
+    const q = document.getElementById('hero-search').value.toLowerCase().trim();
+    if (!q) return;
+    const match = products.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      p.artisan.toLowerCase().includes(q) ||
+      p.location.toLowerCase().includes(q)
+    );
+    const grid = document.getElementById('products-grid');
+    document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      if (match.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);">No results for "<strong>${q}</strong>". Try pottery, jewelry, or embroidery.</div>`;
+      } else {
+        grid.innerHTML = match.map(p => `
+          <div class="product-card">
+            <div class="product-img" style="background:${p.bg}">
+              <span>${p.emoji}</span>
+              <span class="product-badge">${p.badge}</span>
+            </div>
+            <div class="product-info">
+              <div class="artisan-tag">
+                <div class="artisan-avatar" style="background:${p.artisanBg}">${p.initials}</div>
+                <span class="artisan-name">${p.artisan}</span>
+                <span class="verified-badge">✓</span>
+              </div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-origin">📍 ${p.location}</div>
+              <div class="product-footer">
+                <span class="product-price">₹${p.price.toLocaleString('en-IN')}</span>
+                <button class="add-btn" onclick="addToCart('${p.name}')">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        showToast(`Found ${match.length} result${match.length > 1 ? 's' : ''} for "${q}"`);
+      }
+    }, 500);
+  }
+
+  // Close modal on outside click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+  });
+
+  renderProducts();
+</script>
+</body>
+</html>
